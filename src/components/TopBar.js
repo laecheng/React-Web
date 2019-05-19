@@ -7,7 +7,7 @@
 
 import React from 'react';
 import logo from "../assets/logo.svg";
-
+import { Icon } from "antd";
 
 
 export class TopBar extends React.Component {
@@ -16,7 +16,16 @@ export class TopBar extends React.Component {
             <header className="App-header">
                 <img src={logo} className="App-logo" alt="logo" />
                 <div>Around</div>
+                {
+                    this.props.isLoggedIn ?
+                        <div className="logout">
+                            <a href="#" onClick={this.props.handleLogout}>
+                                <Icon type="logout" /> Logout
+                            </a>
+                        </div> : null
+                }
             </header>
+
         )
     }
 }

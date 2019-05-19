@@ -1,9 +1,7 @@
 import React from 'react';
-import {
-    Form,
-    Input,
-    Button,
-} from 'antd';
+import { Link } from "react-router-dom";
+import { Form, Input, Button, message } from 'antd';
+import { API_ROOT } from '../constants';
 
 class RegistrationForm extends React.Component {
     state = {
@@ -15,6 +13,29 @@ class RegistrationForm extends React.Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+
+                fetch(`${API_ROOT}/signup`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        username: values.username,
+                        password: values.password
+                    })
+                })
+                .then(
+                    (response) => {
+                        if (response.ok) {
+                            message.success('Registration Succeed');
+                            this.props.history.push('/login');
+                            return;
+                        }
+                        throw new Error(response.statusText);
+                    }
+                )
+                .catch(
+                    (err) => {
+                        message.error('Registration Failed')
+                    }
+                )
             }
         });
     };
@@ -68,17 +89,13 @@ class RegistrationForm extends React.Component {
         };
 
         return (
-            <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-                <Form.Item label="E-mail">
-                    {getFieldDecorator('email', {
+            <Form {...formItemLayout} onSubmit={this.handleSubmit} className="register">
+                <Form.Item label="Username">
+                    {getFieldDecorator('username', {
                         rules: [
                             {
-                                type: 'email',
-                                message: 'The input is not valid E-mail!',
-                            },
-                            {
                                 required: true,
-                                message: 'Please input your E-mail!',
+                                message: 'Please input your username!',
                             },
                         ],
                     })(<Input />)}
@@ -113,6 +130,9 @@ class RegistrationForm extends React.Component {
                     <Button type="primary" htmlType="submit">
                         Register
                     </Button>
+                    <p>
+                        I already have an account, go back to <Link to="/login">login</Link>
+                    </p>
                 </Form.Item>
             </Form>
         );

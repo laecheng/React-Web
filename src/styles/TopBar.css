@@ -9,3 +9,8 @@
     align-items: center;
     color: #61dafb;
 }
+
+.logout {
+    position: absolute;
+    right: 25px;
+}
