@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Link, Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import { Register } from './Register';
 import { Login } from './Login';
 import { Home } from './Home'

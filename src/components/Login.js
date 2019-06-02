@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Form, Icon, Input, Button, Checkbox, message } from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd';
 import { API_ROOT } from "../constants";
 
 class NormalLoginForm extends React.Component {
@@ -15,22 +15,19 @@ class NormalLoginForm extends React.Component {
                         username: values.username,
                         password: values.password
                     })
-                })
-                .then(
+                }).then(
                     (response) => {
                         if (response.ok) {
                             return response.text();
                         }
                         throw new Error(response.statusText);
                     }
-                )
-                .then(
+                ).then(
                     (response) => {
                         message.success('Login Success')
                         this.props.handleLogin(response);
                     }
-                )
-                .catch(
+                ).catch(
                     (err) => {
                         message.error('Login Failed')
                     }

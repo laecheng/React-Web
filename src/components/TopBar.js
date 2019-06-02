@@ -18,14 +18,11 @@ export class TopBar extends React.Component {
                 <div>Around</div>
                 {
                     this.props.isLoggedIn ?
-                        <div className="logout">
-                            <a href="#" onClick={this.props.handleLogout}>
-                                <Icon type="logout" /> Logout
-                            </a>
-                        </div> : null
+                        <a className="logout" onClick={this.props.handleLogout}>
+                            <Icon type="logout"/> Logout
+                        </a> : null
                 }
             </header>
-
         )
     }
 }
