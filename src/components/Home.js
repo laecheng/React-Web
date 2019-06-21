@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Tabs, Spin } from 'antd';
-import { GEO_OPTIONS, POS_KEY, API_ROOT, AUTH_HEADER, TOKEN_KEY } from '../constants';
+import { GEO_OPTIONS, POS_KEY, API_ROOT, AUTH_HEADER, TOKEN_KEY, DEFAULT_SEARCH_RANGE} from '../constants';
 import { Gallery } from './Gallery';
 import { CreatePostButton } from "./CreatePostButton";
 import { AroundMap } from "./AroundMap";
@@ -52,7 +52,7 @@ export class Home extends React.Component {
 
     loadNearbyPosts = (center, radius) => {
         const { lat, lon } = center ? center : JSON.parse(localStorage.getItem(POS_KEY));
-        const range = radius ? radius : 20;
+        const range = radius ? radius : DEFAULT_SEARCH_RANGE;
         const token = localStorage.getItem(TOKEN_KEY);
 
         this.setState({ isLoadingPosts: true, error: '' });
